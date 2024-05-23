@@ -1,5 +1,5 @@
 from django.db import models
-from addproductos.models import Cart
+from apps.addproductos.models import Cart
 
 class Pedido(models.Model):
     cart = models.OneToOneField(Cart, on_delete=models.CASCADE)
