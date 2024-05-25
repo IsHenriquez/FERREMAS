@@ -50,7 +50,7 @@ python manage.py runserver
 
 **NOTA: Se recomienda emplear Postman para los siguientes pasos**
 
-### 1. Ingrese datos de prueba
+### Optativo: Ingrese datos de prueba
 
 ```bash
 # Ejecute Agregarproducto.py
@@ -58,10 +58,10 @@ python Agregarproducto.py
 # Siga las instrucciones para generar datos de prueba
 ```
 
-### 2. Endpoint API1 (Método HTTP GET)
+### 1. Endpoint API1 (Método HTTP GET)
 * Ingrese en Postman la siguiente URL: http://127.0.0.1:8000/api/productos/. Luego, pulse Send.
 
-### 3. Endpoint API2 (Método HTTP POST)
+### 2. Endpoint API2 (Método HTTP POST)
 * En Postman, dentro de la sección body, ingrese los datos en raw para generar carrito de compras. Puede usar los creados por usted en el paso 1, o los contenidos en la base de datos. Siga este ejemplo para ingresar datos.
 ```bash
 # Datos de ejemplo
