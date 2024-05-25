@@ -3,6 +3,7 @@
 
 > [!NOTE]
 > **Puedes revisar la documentación en https://documenter.getpostman.com/view/34610614/2sA3Qqgsaz**
+> También se encuentra una copia de la documentación en API_FERREMAS_DOCUMENTACION, dentro de la carpeta del proyecto
 
 
 # Autores
