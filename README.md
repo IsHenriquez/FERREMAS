@@ -1,11 +1,8 @@
 
 # FERREMAS
 
-A brief description of what this project does and who it's for
-
-
 > [!NOTE]
-> AQUI TIENES UN CONSEJO
+> Puedes revisar la documentación en https://documenter.getpostman.com/view/34610614/2sA3Qqgsaz
 
 
 # Autores
