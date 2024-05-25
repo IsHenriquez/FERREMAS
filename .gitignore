@@ -1,0 +1,6 @@
+# Excluir configuraciones de IDE
+.idea/
+.vscode/
+
+# Excluir entorno virtual
+myenv/
