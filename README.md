@@ -45,3 +45,20 @@ pip install requirement.txt
 ```bash
 python manage.py runserver
 ```
+
+# Instrucciones de prueba
+
+** NOTA: Se recomienda emplear Postman para los siguientes pasos **
+
+### 1. Ingrese datos de prueba
+
+```bash
+# Ejecute Agregarproducto.py
+python Agregarproducto.py
+# Siga las instrucciones para generar datos de prueba
+```
+
+### 2. Endpoint API1
+* Método HTTP GET: Ingrese en postman la siguiente URL: (http://127.0.0.1:8000/api/productos/)
+* 
+
