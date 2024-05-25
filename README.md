@@ -48,7 +48,7 @@ python manage.py runserver
 
 # Instrucciones de prueba
 
-** NOTA: Se recomienda emplear Postman para los siguientes pasos **
+**NOTA: Se recomienda emplear Postman para los siguientes pasos**
 
 ### 1. Ingrese datos de prueba
 
@@ -58,7 +58,30 @@ python Agregarproducto.py
 # Siga las instrucciones para generar datos de prueba
 ```
 
-### 2. Endpoint API1
-* Método HTTP GET: Ingrese en postman la siguiente URL: (http://127.0.0.1:8000/api/productos/)
-* 
+### 2. Endpoint API1 (Método HTTP GET)
+* Ingrese en Postman la siguiente URL: http://127.0.0.1:8000/api/productos/. Luego, pulse Send.
+
+### 3. Endpoint API2 (Método HTTP POST)
+* En Postman, dentro de la sección body, ingrese los datos en raw para generar carrito de compras. Puede usar los creados por usted en el paso 1, o los contenidos en la base de datos. Siga este ejemplo para ingresar datos.
+```bash
+# Datos de ejemplo
+{
+  "products": [
+    {"codigo_producto": "FER-543210", "quantity": 3}
+    {"codigo_producto": "FER-12345", "quantity": 1}
+  ]
+}
+```
+* Ingrese la siguiente URL: http://127.0.0.1:8000/api/carrito/ y apriete Send.
+* La respuesta de la API le entregará una id de carrito, esto es importante para el funcionamiento de API3.
+
+### 3. Endpoint API3 (Método HTTP POST)
+* En Postman, dentro de la sección body, ingrese los datos requeridos ("cart_id") en body con raw.
+```bash
+# Recuerde el número del carrito anterior.
+{
+    "cart_id": [SU NÚMERO DE CARRITO]
+}
+```
+* Ingrese la siguiente URL: http://127.0.0.1:8000/api/finalizar_compra/ y apriete Send.
 
