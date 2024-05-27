@@ -49,7 +49,7 @@ python manage.py runserver
 
 **NOTA: Se recomienda emplear Postman para los siguientes pasos**
 
-### Optativo: Ingrese datos de prueba
+### Ingrese datos de prueba
 
 ```bash
 # Ejecute Agregarproducto.py
