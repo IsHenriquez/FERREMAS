@@ -16,10 +16,15 @@ También se encuentra una copia de la documentación en API_FERREMAS_DOCUMENTACI
 
 # Instalación y configuración
 
+> [!IMPORTANT]
+> **Debe tener instalado python y pip antes de seguir con la instalación y configuración** 
+
 ### 1. Clonar repositorio
 ```bash
 git clone https://github.com/IsHenriquez/FERREMAS.git
 ```
+
+
 
 ### 2. Instalación y configuracion de `virtualenv` 
 ```bash 
