@@ -37,7 +37,7 @@ myenv\Scripts\activate
 
 ### 3. Instalar dependencias
 ```bash
-pip install requirement.txt
+pip install -r requirement.txt
 ```
 
 ### 4. Ejecutar el servidor
