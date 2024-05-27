@@ -42,7 +42,7 @@ myenv\Scripts\activate
 
 ### 3. Instalar dependencias
 ```bash
-pip install -r requirement.txt
+pip install -r requirements.txt
 ```
 
 ### 4. Ejecutar el servidor
@@ -63,7 +63,7 @@ python Agregarproducto.py
 ```
 
 ### 1. Endpoint API1 (Método HTTP GET)
-
+- Puede usar los creados por usted en el paso de "Ingresar datos de prueba", o los contenidos en la base de datos. Siga el ejemplo de recuadro de abajo
 
 ```bash
 # Para consultar todos los productos ingrese la siguiente URL y presione send:
@@ -74,7 +74,9 @@ http://127.0.0.1:8000/api/productos/FER-54321
 ```
 
 ### 2. Endpoint API2 (Método HTTP POST)
-* En Postman, dentro de la sección body, ingrese los datos en raw para generar carrito de compras. Puede usar los creados por usted en el paso optativo, o los contenidos en la base de datos. Siga este ejemplo para ingresar datos.
+- Dentro de las secciónes ingresar a body, seleccione raw y cambiar formato "Text" a formato "Json".
+- Para generar carrito de compras. Puede usar los creados por usted en el paso de "Ingresar datos de prueba", o los contenidos en la base de datos. Siga el ejemplo del recuadro Body que esta mas abajo para ingresar datos.
+
 ```bash
 # Datos de ejemplo
 {
@@ -88,7 +90,10 @@ http://127.0.0.1:8000/api/productos/FER-54321
 * La respuesta de la API le entregará una id de carrito, esto es importante para el funcionamiento de API3.
 
 ### 3. Endpoint API3 (Método HTTP POST)
-* En Postman, dentro de la sección body, ingrese los datos requeridos ("cart_id") en body con raw.
+- Dentro de las secciónes ingresar a body, seleccione raw y cambiar formato "Text" a formato "Json".
+- Siga el ejemplo del recuadro Body que esta mas abajo para ingresar datos.
+- Con el numero que le dio en la respuesta de la api de agregar producto "cart_id" ingresarlo en el body como se muestra
+
 ```bash
 # Recuerde el número del carrito anterior.
 {
