@@ -41,7 +41,10 @@ def add_to_cart(request):
 
             # Comprobar si hay suficiente stock
             if producto.stock < quantity:
-                errors.append({'codigo_producto': codigo_producto, 'error': 'Stock insuficiente', 'status': 'failed'})
+                if producto.stock == 0:
+                    errors.append({'codigo_producto': codigo_producto, 'error': 'No queda stock de este producto', 'status': 'failed'})
+                else:
+                    errors.append({'codigo_producto': codigo_producto, 'error': f'Stock insuficiente. Solo quedan {producto.stock} unidades', 'status': 'failed'})
                 continue
 
             # Obtener el precio más reciente del producto

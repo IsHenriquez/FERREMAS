@@ -42,4 +42,5 @@ class TestAddProductToCartUnit:
         data = {'products': [{'codigo_producto': "PROD123", 'quantity': 2}]}
         response = client.post('/api/carrito/', data, format='json')
         assert response.status_code == status.HTTP_400_BAD_REQUEST
-        assert 'Stock insuficiente' in response.data['errors'][0]['error']
+        expected_error_message = f'Stock insuficiente. Solo quedan {product.stock} unidades'
+        assert expected_error_message in response.data['errors'][0]['error']
