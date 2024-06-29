@@ -70,11 +70,10 @@ def add_to_cart(request):
             errors.append({'codigo_producto': codigo_producto, 'error': 'No hay un precio disponible para el producto', 'status': 'failed'})
 
     # Finalizar la respuesta basada en si hubo errores o no
-        if not errors:
-            # Si no hay errores, actualizar el total del carrito y devolver la respuesta de éxito
-            cart.update_total()
-            message_cart = 'Su numero de carrito a pagar es --> ' + str(cart.id)
-            return Response({'cart_id': message_cart, 'products': response_data, 'precio_total': cart.precio_total}, status=status.HTTP_201_CREATED)
+    if not errors:
+        # Si no hay errores, actualizar el total del carrito y devolver la respuesta de éxito
+        cart.update_total()
+        return Response({'cart_id': 'Su numero de carrito a pagar es --> ' + str(cart.id), 'products': response_data, 'precio_total': cart.precio_total}, status=status.HTTP_201_CREATED)
     else:
         # Si hay errores, eliminar el carrito creado y devolver los errores
         cart.delete()
