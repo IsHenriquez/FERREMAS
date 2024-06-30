@@ -35,7 +35,7 @@ class TestAddToCartIntegration:
 
     def test_add_out_of_stock_product(self):
         """
-        Test para verificar que la API maneja correctamente un producto que está fuera de stock.
+        Test para verificar que la API maneja correctamente un producto que no.
         """
         data = {
             'products': [

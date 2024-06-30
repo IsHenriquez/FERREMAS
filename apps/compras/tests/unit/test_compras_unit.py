@@ -7,32 +7,29 @@ from django.urls import reverse
 from rest_framework.test import APIClient
 from rest_framework import status
 from apps.addproductos.models import Cart, CartItem
-from apps.productos.models import Producto
+from apps.productos.models import Precio, Producto
 
 @pytest.mark.django_db
 def test_finalizar_compra():
     producto = Producto.objects.create(
         codigo_producto="12345",
-        marca="TestMarca",
-        modelo="TestModelo",
-        codigo="12345",
         nombre="TestProducto",
         stock=10
     )
+    Precio.objects.create(producto=producto, fecha='2023-01-01', valor=100.00)
     cart = Cart.objects.create(precio_total=100)
     cart_item = CartItem.objects.create(cart=cart, product=producto, quantity=1)
 
     client = APIClient()
     url = reverse('finalizar_compra')
 
-
     data = {'cart_id': cart.id}
     response = client.post(url, data, format='json')
 
-
     assert response.status_code == status.HTTP_200_OK
     assert response.data['Confirmación de pago'] == "Compra realizada!"
-    assert Cart.objects.filter(id=cart.id).exists() is False
+    assert Cart.objects.filter(id=cart.id).exists()  # Verificar que el carrito sigue existiendo
+    assert Cart.objects.get(id=cart.id).estado == 'pagado'  # Verificar que el estado del carrito es 'pagado'
 
 @pytest.mark.django_db
 def test_finalizar_compra_carrito_no_existente():
@@ -148,29 +145,25 @@ def test_stock_insuficiente_finalizar_compra():
     assert Cart.objects.filter(id=cart.id).exists() is True  # El carrito no debería eliminarse
 
 @pytest.mark.django_db
-def test_eliminar_carrito_al_finalizar_compra():
-    # Configurar datos de prueba
+def test_guardar_carrito_al_finalizar_compra():
     producto = Producto.objects.create(
         codigo_producto="11111",
-        marca="TestMarca",
-        modelo="TestModelo",
-        codigo="11111",
         nombre="ProductoTest",
         stock=5
     )
+    Precio.objects.create(producto=producto, fecha='2023-01-01', valor=50.00)
     cart = Cart.objects.create(precio_total=50)
     cart_item = CartItem.objects.create(cart=cart, product=producto, quantity=2)
 
     client = APIClient()
     url = reverse('finalizar_compra')
 
-    # Simular solicitud POST
     data = {'cart_id': cart.id}
     response = client.post(url, data, format='json')
 
-    # Verificar el estado de la respuesta y los datos devueltos
     assert response.status_code == status.HTTP_200_OK
-    assert Cart.objects.filter(id=cart.id).exists() is False  # Verificar que el carrito se haya eliminado
+    assert Cart.objects.filter(id=cart.id).exists()  # Verificar que el carrito sigue existiendo
+    assert Cart.objects.get(id=cart.id).estado == 'pagado'  # Verificar que el estado del carrito es 'pagado'
 
     # Verificar que el stock del producto se haya actualizado
     producto_actualizado = Producto.objects.get(id=producto.id)

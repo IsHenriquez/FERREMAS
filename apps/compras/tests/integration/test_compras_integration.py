@@ -7,19 +7,17 @@ from rest_framework.test import APIClient
 from rest_framework import status
 from apps.compras.models import Pedido
 from apps.addproductos.models import Cart, CartItem
-from apps.productos.models import Producto
+from apps.productos.models import Precio, Producto
 
 @pytest.mark.django_db
 def test_integracion_finalizar_compra():
     # Configurar datos de prueba
     producto = Producto.objects.create(
         codigo_producto="22222",
-        marca="TestMarca",
-        modelo="TestModelo",
-        codigo="22222",
         nombre="ProductoPrueba",
         stock=5
     )
+    Precio.objects.create(producto=producto, fecha='2023-01-01', valor=25.00)
     cart = Cart.objects.create(precio_total=75)
     cart_item = CartItem.objects.create(cart=cart, product=producto, quantity=3)
 
@@ -33,7 +31,8 @@ def test_integracion_finalizar_compra():
     # Verificar el estado de la respuesta y los datos devueltos en finalizar compra
     assert response_finalizar.status_code == status.HTTP_200_OK
     assert response_finalizar.data['Confirmación de pago'] == "Compra realizada!"
-    assert Cart.objects.filter(id=cart.id).exists() is False  # Verificar que el carrito se haya eliminado
+    assert Cart.objects.filter(id=cart.id).exists()  # Verificar que el carrito sigue existiendo
+    assert Cart.objects.get(id=cart.id).estado == 'pagado'  # Verificar que el estado del carrito es 'pagado'
 
     # Verificar que el stock del producto se haya actualizado
     producto_actualizado = Producto.objects.get(id=producto.id)
@@ -85,16 +84,14 @@ def test_integracion_finalizar_compra_carrito_no_existente():
     assert 'El carrito no existe' in response_finalizar.data['error']
 
 @pytest.mark.django_db
-def test_integracion_finalizar_compra_eliminacion_carrito():
+def test_integracion_finalizar_compra_guardar_carrito():
     # Configurar datos de prueba
     producto = Producto.objects.create(
         codigo_producto="44444",
-        marca="TestMarca",
-        modelo="TestModelo",
-        codigo="44444",
         nombre="ProductoFinalizarCompra",
         stock=10
     )
+    Precio.objects.create(producto=producto, fecha='2023-01-01', valor=50.00)
     cart = Cart.objects.create(precio_total=100)
     cart_item = CartItem.objects.create(cart=cart, product=producto, quantity=2)
 
@@ -109,8 +106,9 @@ def test_integracion_finalizar_compra_eliminacion_carrito():
     assert response_finalizar.status_code == status.HTTP_200_OK
     assert response_finalizar.data['Confirmación de pago'] == "Compra realizada!"
 
-    # Verificar que el carrito se haya eliminado
-    assert not Cart.objects.filter(id=cart.id).exists()
+    # Verificar que el carrito sigue existiendo y su estado es 'pagado'
+    assert Cart.objects.filter(id=cart.id).exists()
+    assert Cart.objects.get(id=cart.id).estado == 'pagado'
 
     # Verificar que el stock del producto se haya actualizado
     producto_actualizado = Producto.objects.get(id=producto.id)

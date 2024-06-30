@@ -33,15 +33,24 @@ def finalizar_compra(request):
                 product.stock -= item.quantity
                 product.save()
             else:
+                cart.estado = 'rechazado'
+                cart.save()
                 return Response({'error': f'Stock insuficiente para el producto {product.nombre}'}, 
                                 status=status.HTTP_400_BAD_REQUEST)
 
-        # Finalizar la compra eliminando el carrito
-        cart.delete()
+        # Marcar el carrito como completado
+        cart.completado = True
+        cart.estado = 'pagado'
+        cart.save()
+        
+        numero_boleta = f'BOLETA-{cart_id}'
 
         # Mensaje final de compra realizada
         time.sleep(5)
         final_message = "Compra realizada!"
 
-        return Response({'AVISO': payment_message, 'Confirmación de pago': final_message}, 
-                        status=status.HTTP_200_OK)
+    return Response({
+        'AVISO': payment_message,
+        'Confirmación de pago': final_message,
+        'numero_boleta': numero_boleta
+    }, status=status.HTTP_200_OK)
