@@ -81,7 +81,82 @@ http://127.0.0.1:8000/api/productos/
 http://127.0.0.1:8000/api/productos/FER-54321
 ```
 
-### 2. Endpoint Crear producto (Método HTTP POST)
+### 2. Endpoint Actualizar producto (Método HTTP PATCH)
+* Para actualizar un producto, primero debe identificar el codigo_producto del producto a editar
+* Luego, ingrese a la url: http://127.0.0.1:8000/api/productos/{codigo_producto}/admin/edit/ , reemplazando la variable {codigo_producto} con el codigo correspondiente
+* Dentro de las secciónes ingresar a body, seleccione raw y cambiar formato "Text" a formato "Json".
+* Siga el ejemplo del recuadro Body que esta mas abajo para ingresar datos.
+* Apriete send para editar el producto en cuestión
+
+
+```bash
+# Datos de ejemplo
+{
+    
+    "marca": "ModeloABC"
+
+}
+```
+
+### 3. Endpoint Eliminar producto (Método HTTP DELETE)
+
+* Para eliminar un producto, primero debe identificar el codigo_producto del producto a eliminar
+* Luego, ingrese a la url: http://127.0.0.1:8000/api/productos/{codigo_producto}/admin/delete/ , reemplazando la variable {codigo_producto} con el codigo correspondiente
+* Apriete send para eliminar el producto en cuestión
+
+
+### 4. Endpoint Agregar producto al carrito (Método HTTP POST)
+- Dentro de las secciónes ingresar a body, seleccione raw y cambiar formato "Text" a formato "Json".
+- Para generar carrito de compras. Puede usar los creados por usted en el paso de "Ingresar datos de prueba", o los contenidos en la base de datos. Siga el ejemplo del recuadro Body que esta mas abajo para ingresar datos.
+
+```bash
+# Datos de ejemplo
+{
+  "products": [
+    {"codigo_producto": "FER-543210", "quantity": 3}
+    {"codigo_producto": "FER-12345", "quantity": 1}
+  ]
+}
+```
+* Ingrese la siguiente URL: http://127.0.0.1:8000/api/carrito/ y apriete Send.
+* La respuesta de la API le entregará una id de carrito, esto es importante para el funcionamiento de API3.
+
+### 5. Endpoint Pagar carrito (Método HTTP POST)
+- Dentro de las secciónes ingresar a body, seleccione raw y cambiar formato "Text" a formato "Json".
+- Siga el ejemplo del recuadro Body que esta mas abajo para ingresar datos.
+- Con el numero que le dio en la respuesta de la api de agregar producto "cart_id" ingresarlo en el body como se muestra
+
+```bash
+# Recuerde el número del carrito anterior.
+{
+    "cart_id": SU NÚMERO DE CARRITO
+}
+```
+* Ingrese la siguiente URL: http://127.0.0.1:8000/api/finalizar_compra/ y apriete Send.
+
+
+
+### 6. Endpoint para generar boleta (Método HTTP POST)
+
+- Dentro de las secciones ingresar a body, seleccione raw y cambiar formato "Text" a formato "Json".
+- Con el número del carrito pagado, ingréselo en la URL como se muestra y apriete send:
+
+```bash
+# Recuerde el número del carrito anterior.
+{
+    "cart_id": SU NÚMERO DE CARRITO
+}
+```
+
+### 7. Endpoint para obtener boleta (Método HTTP GET)
+
+- Para obtener los detalles de la boleta, use el cart_id del carrito pagado en la URL y apriete send:
+
+```bash
+http://127.0.0.1:8000/api/boleta/Numero_carrito/
+```
+
+### 8. Endpoint Crear producto (Método HTTP POST)
 
 * Para crear productos, ingrese a la url: http://127.0.0.1:8000/api/productos/admin/create/
 * Dentro de las secciónes ingresar a body, seleccione raw y cambiar formato "Text" a formato "Json".
@@ -100,79 +175,4 @@ http://127.0.0.1:8000/api/productos/FER-54321
         "nombre": "Producto 1",
         "stock": 10
 }
-```
-
-### 3. Endpoint Actualizar producto (Método HTTP PATCH)
-* Para actualizar un producto, primero debe identificar el codigo_producto del producto a editar
-* Luego, ingrese a la url: http://127.0.0.1:8000/api/productos/{codigo_producto}/admin/edit/ , reemplazando la variable {codigo_producto} con el codigo correspondiente
-* Dentro de las secciónes ingresar a body, seleccione raw y cambiar formato "Text" a formato "Json".
-* Siga el ejemplo del recuadro Body que esta mas abajo para ingresar datos.
-* Apriete send para editar el producto en cuestión
-
-
-```bash
-# Datos de ejemplo
-{
-    
-    "marca": "ModeloABC"
-
-}
-```
-
-### 4. Endpoint Eliminar producto (Método HTTP DELETE)
-
-* Para eliminar un producto, primero debe identificar el codigo_producto del producto a eliminar
-* Luego, ingrese a la url: http://127.0.0.1:8000/api/productos/{codigo_producto}/admin/delete/ , reemplazando la variable {codigo_producto} con el codigo correspondiente
-* Apriete send para eliminar el producto en cuestión
-
-
-### 5. Endpoint Agregar producto al carrito (Método HTTP POST)
-- Dentro de las secciónes ingresar a body, seleccione raw y cambiar formato "Text" a formato "Json".
-- Para generar carrito de compras. Puede usar los creados por usted en el paso de "Ingresar datos de prueba", o los contenidos en la base de datos. Siga el ejemplo del recuadro Body que esta mas abajo para ingresar datos.
-
-```bash
-# Datos de ejemplo
-{
-  "products": [
-    {"codigo_producto": "FER-543210", "quantity": 3}
-    {"codigo_producto": "FER-12345", "quantity": 1}
-  ]
-}
-```
-* Ingrese la siguiente URL: http://127.0.0.1:8000/api/carrito/ y apriete Send.
-* La respuesta de la API le entregará una id de carrito, esto es importante para el funcionamiento de API3.
-
-### 6. Endpoint Pagar carrito (Método HTTP POST)
-- Dentro de las secciónes ingresar a body, seleccione raw y cambiar formato "Text" a formato "Json".
-- Siga el ejemplo del recuadro Body que esta mas abajo para ingresar datos.
-- Con el numero que le dio en la respuesta de la api de agregar producto "cart_id" ingresarlo en el body como se muestra
-
-```bash
-# Recuerde el número del carrito anterior.
-{
-    "cart_id": SU NÚMERO DE CARRITO
-}
-```
-* Ingrese la siguiente URL: http://127.0.0.1:8000/api/finalizar_compra/ y apriete Send.
-
-
-
-### 7. Endpoint para generar boleta (Método HTTP POST)
-
-- Dentro de las secciones ingresar a body, seleccione raw y cambiar formato "Text" a formato "Json".
-- Con el número del carrito pagado, ingréselo en la URL como se muestra y apriete send:
-
-```bash
-# Recuerde el número del carrito anterior.
-{
-    "cart_id": SU NÚMERO DE CARRITO
-}
-```
-
-### 8. Endpoint para obtener boleta (Método HTTP GET)
-
-- Para obtener los detalles de la boleta, use el cart_id del carrito pagado en la URL y apriete send:
-
-```bash
-http://127.0.0.1:8000/api/boleta/Numero_carrito/
 ```
