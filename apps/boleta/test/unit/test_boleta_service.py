@@ -22,7 +22,7 @@ class TestBoletaAPI:
         """
         client = APIClient()
         url = '/api/boleta/generar/'
-        data = {'cart_id': 999}
+        data = {'cart_id': 999}  # ID de carrito que no existe
         response = client.post(url, data, format='json')
         assert response.status_code == status.HTTP_404_NOT_FOUND
         assert response.data['error'] == 'El carrito no existe'

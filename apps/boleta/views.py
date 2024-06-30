@@ -7,7 +7,8 @@ from django.utils import timezone
 from decimal import Decimal
 
 @api_view(['POST'])
-def generar_boleta(request, cart_id):
+def generar_boleta(request):
+    cart_id = request.data.get('cart_id')
     if not cart_id:
         return Response({'error': 'Cart ID es requerido'}, status=status.HTTP_400_BAD_REQUEST)
     
