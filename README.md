@@ -50,6 +50,14 @@ pip install -r requirements.txt
 python manage.py runserver
 ```
 
+## Ejecutar Tests
+
+- Para correr los test ingrese el siguiendo comando en la terminal
+
+```bash
+  pytest
+```
+
 # Instrucciones de prueba
 
 **NOTA: Se recomienda emplear Postman para los siguientes pasos**
@@ -62,7 +70,7 @@ python Agregarproducto.py
 # Siga las instrucciones de la terminal para generar datos de prueba
 ```
 
-### 1. Endpoint API1 (Método HTTP GET)
+### 1. Endpoint productos (Método HTTP GET)
 - Puede usar los creados por usted en el paso de "Ingresar datos de prueba", o los contenidos en la base de datos. Siga el ejemplo de recuadro de abajo
 
 ```bash
@@ -73,7 +81,7 @@ http://127.0.0.1:8000/api/productos/
 http://127.0.0.1:8000/api/productos/FER-54321
 ```
 
-### 2. Endpoint API2 (Método HTTP POST)
+### 2. Endpoint Agregar producto al carrito (Método HTTP POST)
 - Dentro de las secciónes ingresar a body, seleccione raw y cambiar formato "Text" a formato "Json".
 - Para generar carrito de compras. Puede usar los creados por usted en el paso de "Ingresar datos de prueba", o los contenidos en la base de datos. Siga el ejemplo del recuadro Body que esta mas abajo para ingresar datos.
 
@@ -89,7 +97,7 @@ http://127.0.0.1:8000/api/productos/FER-54321
 * Ingrese la siguiente URL: http://127.0.0.1:8000/api/carrito/ y apriete Send.
 * La respuesta de la API le entregará una id de carrito, esto es importante para el funcionamiento de API3.
 
-### 3. Endpoint API3 (Método HTTP POST)
+### 3. Endpoint Pagar carrito (Método HTTP POST)
 - Dentro de las secciónes ingresar a body, seleccione raw y cambiar formato "Text" a formato "Json".
 - Siga el ejemplo del recuadro Body que esta mas abajo para ingresar datos.
 - Con el numero que le dio en la respuesta de la api de agregar producto "cart_id" ingresarlo en el body como se muestra
@@ -102,3 +110,24 @@ http://127.0.0.1:8000/api/productos/FER-54321
 ```
 * Ingrese la siguiente URL: http://127.0.0.1:8000/api/finalizar_compra/ y apriete Send.
 
+
+### 4. Endpoint para generar boleta (Método HTTP POST)
+
+- Dentro de las secciones ingresar a body, seleccione raw y cambiar formato "Text" a formato "Json".
+- Con el número del carrito pagado, ingréselo en el body como se muestra:
+
+```bash
+# Recuerde el número del carrito anterior.
+{
+    "cart_id": SU NÚMERO DE CARRITO
+}
+```
+- Ingrese la siguiente URL: http://127.0.0.1:8000/api/boleta/generar/ y apriete Send.
+
+### 5. Endpoint para obtener boleta (Método HTTP GET)
+
+- Para obtener los detalles de la boleta, use el cart_id del carrito pagado en la URL y apriete send:
+
+```bash
+http://127.0.0.1:8000/api/boleta/Numero_carrito/
+```
