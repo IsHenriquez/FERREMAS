@@ -102,3 +102,48 @@ http://127.0.0.1:8000/api/productos/FER-54321
 ```
 * Ingrese la siguiente URL: http://127.0.0.1:8000/api/finalizar_compra/ y apriete Send.
 
+
+### 4. Endpoint API4 (Método HTTP POST)
+
+* Para crear productos, ingrese a la url: http://127.0.0.1:8000/api/productos/admin/create/
+* Dentro de las secciónes ingresar a body, seleccione raw y cambiar formato "Text" a formato "Json".
+* Siga el ejemplo del recuadro Body que esta mas abajo para ingresar datos.
+* El código de producto a crear, no debe existir
+* Apriete send para crear el producto ingresado
+
+```bash
+# Datos de ejemplo
+{
+    
+    "codigo_producto": "PROD1234",
+        "marca": "Marca1",
+        "modelo": "Modelo1",
+        "codigo": "COD001",
+        "nombre": "Producto 1",
+        "stock": 10
+}
+```
+
+### 5. Endpoint API5 (Método HTTP PATCH)
+* Para actualizar un producto, primero debe identificar el codigo_producto del producto a editar
+* Luego, ingrese a la url: http://127.0.0.1:8000/api/productos/{codigo_producto}/admin/edit/ , reemplazando la variable {codigo_producto} con el codigo correspondiente
+* Dentro de las secciónes ingresar a body, seleccione raw y cambiar formato "Text" a formato "Json".
+* Siga el ejemplo del recuadro Body que esta mas abajo para ingresar datos.
+* Apriete send para editar el producto en cuestión
+
+
+```bash
+# Datos de ejemplo
+{
+    
+    "marca": "ModeloABC"
+
+}
+```
+
+### 6. Endpoint API6 (Método HTTP DELETE)
+
+* Para eliminar un producto, primero debe identificar el codigo_producto del producto a eliminar
+* Luego, ingrese a la url: http://127.0.0.1:8000/api/productos/{codigo_producto}/admin/delete/ , reemplazando la variable {codigo_producto} con el codigo correspondiente
+* Apriete send para eliminar el producto en cuestión
+
