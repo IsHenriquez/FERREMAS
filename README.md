@@ -114,15 +114,12 @@ http://127.0.0.1:8000/api/productos/FER-54321
 ### 4. Endpoint para generar boleta (Método HTTP POST)
 
 - Dentro de las secciones ingresar a body, seleccione raw y cambiar formato "Text" a formato "Json".
-- Con el número del carrito pagado, ingréselo en el body como se muestra:
+- Con el número del carrito pagado, ingréselo en la URL como se muestra y apriete send:
 
 ```bash
 # Recuerde el número del carrito anterior.
-{
-    "cart_id": SU NÚMERO DE CARRITO
-}
+http://localhost:8000/api/boleta/generar/Numero_carrito/
 ```
-- Ingrese la siguiente URL: http://127.0.0.1:8000/api/boleta/generar/ y apriete Send.
 
 ### 5. Endpoint para obtener boleta (Método HTTP GET)
 
