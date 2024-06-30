@@ -115,11 +115,3 @@ class TestIntegrationProducts(APITestCase):
         
         
 
-
-
-'''
-1 crear un producto y luego ver la lista, si es que se ve
-2 editar un producto y ver la lista, si es que se ve actualizado
-3 eliminar un producto y luego ver la lista, si es que no se ve
-4 editar el codigo de un producto y luego intentar verlo unitariamente con el codigo antiguo, si es que no lo ve
-'''
