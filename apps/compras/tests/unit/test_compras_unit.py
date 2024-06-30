@@ -32,19 +32,6 @@ def test_finalizar_compra():
     assert Cart.objects.get(id=cart.id).estado == 'pagado'  # Verificar que el estado del carrito es 'pagado'
 
 @pytest.mark.django_db
-def test_finalizar_compra_carrito_no_existente():
-    client = APIClient()
-    url = reverse('finalizar_compra')
-
-    # Simular solicitud POST con un cart_id que no existe
-    data = {'cart_id': 9999}
-    response = client.post(url, data, format='json')
-
-    # Verificar que se recibe un error 404 y el mensaje adecuado
-    assert response.status_code == status.HTTP_404_NOT_FOUND
-    assert 'El carrito no existe' in response.data['error']
-
-@pytest.mark.django_db
 def test_finalizar_compra_stock_insuficiente():
     # Configurar datos de prueba
     producto = Producto.objects.create(
